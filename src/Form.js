@@ -31,10 +31,7 @@ const Form = () => {
     e.preventDefault();
 
     axios
-      .post(
-        "https://cook-out-logs-j8dad.ondigitalocean.app:8080/orders/create",
-        order
-      )
+      .post("http://157.245.121.84:8080/orders/create", order)
       .then((res) => {
         console.log(res.data);
         setSubmitted(true);
@@ -47,7 +44,7 @@ const Form = () => {
 
   const getOrders = () => {
     axios
-      .get("https://cook-out-logs-j8dad.ondigitalocean.app:8080/orders")
+      .get("http://157.245.121.84:8080/orders")
       .then((res) => {
         setOrder2(res.data);
         //orders.push({ order: res.data });
