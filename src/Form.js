@@ -18,6 +18,7 @@ const Form = () => {
   const [order2, setOrder2] = useState(orders);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   const handleChange = (e) => {
     setOrder({
@@ -39,7 +40,10 @@ const Form = () => {
       .catch((error) => {
         console.log(error);
       });
-    [e.target.name] = "";
+    e.target.orderNumber.value = "";
+    e.target.title.value = "";
+    e.target.file.value = "";
+    e.target.description.value = "";
   };
 
   const getOrders = () => {
@@ -47,6 +51,8 @@ const Form = () => {
       .get("http://157.245.121.84:8080/orders")
       .then((res) => {
         setOrder2(res.data);
+        setFlag(true);
+
         //orders.push({ order: res.data });
       })
       .catch(function (error) {
@@ -61,7 +67,7 @@ const Form = () => {
         setSubmitted(false);
       }, 3000);
     }
-  }, [order2]);
+  }, [submitted]);
 
   const uploadImage = async (e) => {
     const files = e.target.files;
